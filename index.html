@@ -38,36 +38,7 @@
       <img src='https://images.unsplash.com/photo-1675124516926-a0864dea0abd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' alt='car and mountains'>
     </div><!-----end of main container--------->
 
-  <script>
-
-    document.querySelectorAll('.controls input').forEach(input => {
-      let isClicked = false;
-
-      input.addEventListener('mousedown', () => { isClicked = true; });
-      input.addEventListener('mouseup', () => { isClicked = false; });
-        
-      input.addEventListener('change', e => {
-        document.documentElement.style.setProperty(`--${e.target.name}`, e.target.value + (e.target.dataset.sizing || e.target.dataset.per || ''));
-        isClicked = true;
-      });      
-
-      input.addEventListener('mousemove', e => {
-        if (isClicked) {
-          document.documentElement.style.setProperty(`--${e.target.name}`, e.target.value + (e.target.dataset.sizing || e.target.dataset.per || ''));
-        }
-      });
-    });
-
-    // or:
-    // const inputs = document.querySelectorAll('.controls input');
-    // function updateHandler() {
-    //   const suffix = this.dataset.sizing || '';
-    //   document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
-    // }
-    // inputs.forEach(input => input.addEventListener('change', updateHandler));
-    // inputs.forEach(input => input.addEventListener('mousemove', updateHandler));
-
-  </script>  
+    <script src="main.js" charset="utf-8"></script> 
 </body>
 </html>
 
@@ -77,4 +48,4 @@ moglibysmy tez stworzyc data-poo, data-cool, generalnie musi to byc slowo data, 
 Zawarta w ten sposob dane mozemy pozniej targetowac za pomoca 'dataset', czyli jednym slowem:
 'this.dataset.sizing' wszystkie inputy ktore posiadaja dataset sizing, ale nie wszystkie nasze posiadaja sizing,
 bo base color nie posiada, wiec uzylismy || '' czyli lub nic nie zawieraja   -->
-</body>
+
