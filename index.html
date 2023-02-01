@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> CSS variables </title>
+
+<!------ Fonts & Icons------>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/dho0gsv.css">
+    <script src="https://kit.fontawesome.com/18719d7896.js" crossorigin="anonymous"></script>
+
+<!------ JS libraries ------>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+<!-------- CSS styles ------>    
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+  </head>
+  <body>
+    <div class='main-container'>
+      <div class='controls'>
+        <label for='spacing'>Spacing:</label>
+        <input type='range' name='spacing' min='10' max='200' value='10' data-sizing='px'>
+
+        <label for='blur'>Blur:</label>
+        <input type='range' name='blur' min='0' max='25' value='10' data-sizing='px'>
+
+        <label for='size'>Resize:</label>
+        <input type='range' name='size' min='0' max='70' value='10' data-per='%'>
+
+        <label for='base'>Base color:</label>
+        <input type='color' name='base' value='#ffffff'>
+      </div>   
+      <img src='https://images.unsplash.com/photo-1675124516926-a0864dea0abd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' alt='car and mountains'>
+    </div><!-----end of main container--------->
+
+  <script>
+
+    document.querySelectorAll('.controls input').forEach(input => {
+      let isClicked = false;
+
+      input.addEventListener('mousedown', () => { isClicked = true; });
+      input.addEventListener('mouseup', () => { isClicked = false; });
+        
+      input.addEventListener('change', e => {
+        document.documentElement.style.setProperty(`--${e.target.name}`, e.target.value + (e.target.dataset.sizing || e.target.dataset.per || ''));
+        isClicked = true;
+      });      
+
+      input.addEventListener('mousemove', e => {
+        if (isClicked) {
+          document.documentElement.style.setProperty(`--${e.target.name}`, e.target.value + (e.target.dataset.sizing || e.target.dataset.per || ''));
+        }
+      });
+    });
+
+    // or:
+    // const inputs = document.querySelectorAll('.controls input');
+    // function updateHandler() {
+    //   const suffix = this.dataset.sizing || '';
+    //   document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+    // }
+    // inputs.forEach(input => input.addEventListener('change', updateHandler));
+    // inputs.forEach(input => input.addEventListener('mousemove', updateHandler));
+
+  </script>  
+</body>
+</html>
+
+<!-- dataset to jest obiekt, ktory zawiera wszystkie atrybuty danego elementu, ktore sami sobie mozemy ustalic.
+Przy inputach uzylismy data-sizing jako extra atrybut, nie ma takiego atrybutu, ale sami go sobie stworzylismy, 
+moglibysmy tez stworzyc data-poo, data-cool, generalnie musi to byc slowo data, po ktorym nastepuje myslnik -
+Zawarta w ten sposob dane mozemy pozniej targetowac za pomoca 'dataset', czyli jednym slowem:
+'this.dataset.sizing' wszystkie inputy ktore posiadaja dataset sizing, ale nie wszystkie nasze posiadaja sizing,
+bo base color nie posiada, wiec uzylismy || '' czyli lub nic nie zawieraja   -->
+</body>
